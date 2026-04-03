@@ -5,21 +5,14 @@ int main() {
 }
   
 bool palindromo(char *cad,int inicio,int fin){}
-	    int n = strlen(cadena);
-    if (n<=1){
+	   
+    if (inico =>fin){
         return true;
     }
 
-    if (cadena[0] != cadena[n-1]) {
+    if (cad[inicio] != cadena[fin]) {
         return false;
     }
 
-    char sub[100];
-
-    for (int i = 0; i < n-2;i++){
-        sub [i] =cadena[i+1];
-    }
-    sub[n-2]= '\0';
-
-    return palindromo(sub);
+    return palindromo(cad,inicio+1,fin-1);
 }

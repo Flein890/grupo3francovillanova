@@ -1,4 +1,7 @@
-#include "./TP_recur/TP_Recursividad.h"
+#include "../Headers/Headers.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 char * ondaDigital(char seniales[]);
 void convertir(char *cadena, char seniales[]); 

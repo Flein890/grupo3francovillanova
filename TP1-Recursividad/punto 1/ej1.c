@@ -1,4 +1,11 @@
 #include "../Headers/Headers.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+bool cadenaValida(char *cad);
+void cadenaMinusculas(char *cad);
 
 int main()
 {
@@ -21,9 +28,8 @@ int main()
     
     cadenaMinusculas(cadena);  
     
-    int tam=strlen(cadena);
-    
-    bool pali=palindromo(cadena,0,tam-1);
+
+    bool pali=palindromo(cadena);
 
     printf("%s",pali ? "Verdadero. La palabra es palindormo." : "Falso. La palabra NO es palindromo.");
         
@@ -31,10 +37,14 @@ int main()
 return 0;
 }
 
-void cadenaMinusculas(char *cad)   //Funcion convierte cadena a minusculas
+void cadenaMinusculas(char *cad)
 {
-    for (int i=0; i<strlen(cad); i++){
-        cad[i]=tolower(cad[i]);
+    int len = strlen(cad);
+
+    for (int i = 0; i < len; i++) {
+        if (cad[i] >= 'A' && cad[i] <= 'Z') {
+            cad[i] = cad[i] + 32;
+        }
     }
 }
 
@@ -49,7 +59,7 @@ bool cadenaValida(char *cad)
 }
 
   
-bool palindromo(char *cad,int inicio,int fin){
+bool esPalindromoRec(char *cad,int inicio,int fin){
 	   
     if (inicio >= fin){
         return true;
@@ -59,5 +69,10 @@ bool palindromo(char *cad,int inicio,int fin){
         return false;
     }
 
-    return palindromo(cad,inicio+1,fin-1);
+    return esPalindromoRec(cad,inicio+1,fin-1);
+}
+
+bool palindromo(char *cad) {
+    int len = strlen(cad);
+    return esPalindromoRec(cad, 0, len - 1);
 }

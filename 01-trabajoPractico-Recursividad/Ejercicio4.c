@@ -9,7 +9,7 @@ float division(int m, int n, int d){
             return 0;
         }
 
-       return (m*10,n,d-1)/10.0;
+       return division(m*10,n,d-1)/10.0;
     }
    
 
@@ -48,6 +48,11 @@ int main() {
 
     if (d < 0){
         printf("Error: d no puede ser negativo\n");
+        return 1;
+    }
+
+    if (d > 6){
+        printf("Error: demasiados decimales (recomendamos como maximo 6)\n");
         return 1;
     }
 

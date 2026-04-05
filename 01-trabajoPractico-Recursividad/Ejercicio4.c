@@ -1,5 +1,6 @@
 #include "tp_1_recursividad.h"
 #include <stdbool.h>
+#include <stdio.h>
 #include <string.h>
 
 float division(int m, int n){

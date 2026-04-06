@@ -3,41 +3,49 @@
 #include <stdio.h>
 #include <string.h>
 
-float division(int m, int n, int d){
-	 if (m < n ){
-        if((m== 0) || (d==0)){
+float division(int m, int n){
+    static int d = -1;   
+    static int inicial = 1;
+
+    if (inicial != 0){
+        do{
+            printf("Ingresa un numero del 1 al 10 para indicar la cantidad de decimales que quiere");
+            scanf("%d", &d);
+
+            if (d < 1 || d > 10){
+                printf("Error: debe estar entre 1 y 10\n");
+            }
+
+        } while (d < 1 || d > 10);
+
+        inicial = 0;
+    }
+
+    if (m < n){
+        if (m == 0 || d == 0){
+            inicial = 1;   
             return 0;
         }
-
-       return division(m*10,n,d-1)/10.0;
+        d--;
+        return division(m * 10, n) / 10.0;
     }
-   
 
-   
-
-    
-    return 1+ division(m-n,n,d);
+    return 1 + division(m - n, n);
 }
 
 int main() {
-    int m, n, d;
+    int m, n;
     float resultado;
-
+	
     printf("Ingrese el dividendo (m): ");
     if (scanf("%d", &m) != 1) {
-        printf("Error: debe ingresar un numero\n");
+        printf("Error: tiene que ingresar un numero\n");
         return 1;
     }
 
     printf("Ingrese el divisor (n): ");
     if (scanf("%d", &n) != 1) {
-        printf("Error: debe ingresar un numero\n");
-        return 1;
-    }
-
-    printf("Ingrese cantidad de decimales (d): ");
-    if (scanf("%d", &d) != 1) {
-        printf("Error: debe ingresar un numero\n");
+        printf("Error: tiene ingresar un numero\n");
         return 1;
     }
 
@@ -46,19 +54,9 @@ int main() {
         return 1;
     }
 
-    if (d < 0){
-        printf("Error: d no puede ser negativo\n");
-        return 1;
-    }
+    resultado = division(m, n);
 
-    if (d > 6){
-        printf("Error: demasiados decimales (recomendamos como maximo 6)\n");
-        return 1;
-    }
-
-    resultado = division(m, n, d);
-
-    printf("Resultado: %.*f\n", d, resultado);
+    printf("Resultado: %f\n", resultado);
 
     return 0;
 }

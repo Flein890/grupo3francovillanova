@@ -30,5 +30,5 @@ Cirigliano Julian : 190129
 email: 
 ------------------
 Valentin Alejo Morello: 190164
-email: 
+email: valentinmorello2@gmail.com
 ------------------

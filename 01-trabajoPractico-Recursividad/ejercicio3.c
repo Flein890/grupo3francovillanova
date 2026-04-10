@@ -2,9 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-int fibo(int);
-
 int main (void){
 
     int num;
@@ -18,16 +15,16 @@ int main (void){
         esValido = scanf("%d",&num);
     }
 
-    int fiboo = fibo(num);
+    int fiboo = terminoSeridFibonacci(num);
     printf("%d",fiboo);
     return false;
 }
 
-int fibo(int a){
+int terminoSeridFibonacci(int a){
     if(a <=1){ //caso base, para que no calcule fibo(-1) + fibo(-2), etc.
         return a;
     }else
     {
-    return fibo(a-1) + fibo(a-2); //caso recursivo por definicion matematica de fibonacci. Fn = Fn-1 + Fn-2
+    return terminoSeridFibonacci(a-1) + terminoSeridFibonacci(a-2); //caso recursivo por definicion matematica de fibonacci. Fn = Fn-1 + Fn-2
     }
 };

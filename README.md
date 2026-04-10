@@ -12,7 +12,7 @@ Curso de Estructuras de Datos y Algoritmos I, Universidad Nacional de Lujan
 ## Alumnos:
 
 Botta Nicolas: 195161
-email: 
+email: nicolasbotta5@gmail.com
 ------------------
 Contreras Franco: 176305 
 email: 

@@ -61,6 +61,20 @@ void ejecutar_2E(Lista l1, Lista l2)
    }
 }
 
+void ejecutar_4(Lista l1, Lista l2)
+{
+    if(l_es_vacia(l1) || l_es_vacia(l2)) printf("\n[ERROR] Atencion: Una(s) de las listas esta vacia, deberan tener al menos una clave.\n");
+    if(l_longitud(l1) != l_longitud(l2)) printf("\n[ERROR] Atencion: Las listas deben tener la misma cantidad de claves para ser comparadas.\n");
+    else
+    {
+        int res = CompararListas(l1, l2);
+        if(res == 3) printf("\n[RESPUESTA]: Las listas son iguales.");
+        else if(res == 1) printf("\n[RESPUESTA]: La lista L1 es mayor que L2.");
+        else printf("\n[RESPUESTA]: La lista L2 es mayor que L1.");
+    }
+    printf("\n[!] Para comparar las listas, se corren una por una, por ende, su complejidad algoritmica es LINEAL. [!]\n");
+}
+
 void mostrarmenu_principal(Lista l1, Lista l2)
 {
     int seleccion;
@@ -100,6 +114,7 @@ void respuesta_menu(int seleccion, Lista l1, Lista l2)
         }
         case 3:
         {
+            ejecutar_4(l1, l2);
             limpiar_c();
             mostrarmenu_principal(l1,l2);
             break;

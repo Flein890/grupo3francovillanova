@@ -5,7 +5,7 @@
 #include <time.h>
 
 /*
-    Modificado por última vez 27/04 - Cris
+    Modificado por ï¿½ltima vez 27/04 - Cris
 */ 
 
 //===========// Prototipos MENU.
@@ -36,7 +36,7 @@ void ejecutar_2C(Lista l1, Lista l2)
 {
     Lista rest = verElementosRepetidos(l1, l2);
     printf("\n[RESPUESTA]: La lista de elementos que se repiten en L1 y L2:\n");
-    if(l_es_vacia(rest)) printf(" LISTA VACIA - No hay elementos que no se repitan.");
+    if(l_es_vacia(rest)) printf(" LISTA VACIA - No hay elementos que se repitan.");
     else l_mostrar(rest);
 }
 

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 /*
-    Modificado por última vez 27/04 - Cris
+    Modificado por ï¿½ltima vez 27/04 - Cris
 */ 
 
 // Punto 2
@@ -64,8 +64,8 @@ ResultadoValorMinimo valorMinimo(Lista l1, Lista l2)
     ResultadoValorMinimo rest;
     int pos = 1;
 
-    if(l_es_vacia(l1)){rest.valor = l_recuperar(l1,1)->clave; rest.pos = 1;}
-    if(l_es_vacia(l2)){rest.valor_2 = l_recuperar(l2, 1)->clave; rest.pos = 1;}
+    if(!l_es_vacia(l1)){rest.valor = l_recuperar(l1,1)->clave; rest.pos = 1;}
+    if(!l_es_vacia(l2)){rest.valor_2 = l_recuperar(l2, 1)->clave; rest.pos_2 = 1;}
 
     while(hay_siguiente(i_l1))
     {   

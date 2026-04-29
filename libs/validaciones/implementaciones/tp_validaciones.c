@@ -2,7 +2,7 @@
 
 const char* c_prohibidos = " /\t\"',:;[]{}&~";
 
-const char* TipoDatoToString(TipoDatoIngresado tipo)
+/*const char* TipoDatoToString(TipoDatoIngresado tipo)
 {
     switch(tipo)
     {
@@ -14,9 +14,9 @@ const char* TipoDatoToString(TipoDatoIngresado tipo)
         case TIPO_FLOTANTE_POSITIVO:   return "TIPO_FLOTANTE_POSITIVO";
         case TIPO_FLOTANTE_NEGATIVO:   return "TIPO_FLOTANTE_NEGATIVO";
         case TIPO_DESCONOCIDO:         return "TIPO_DESCONOCIDO";
-        default:                       return "TIPO_GAGA";
+        default:                       return "TIPO_ERROR";
     }
-}
+}*/
 
 void eliminarCaracter(char cadena[], int posicion)
 {

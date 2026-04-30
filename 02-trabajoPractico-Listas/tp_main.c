@@ -119,9 +119,9 @@ void ejecutar_5()
     printf("\n[!]: Acontinuacion, debera ingresar un valor a ser utilizado como 'paso' entre los extremos del rango.\n");
     do
     {
-        printf("\n[!]: Max (%.4f) >= Paso >= min (%.4f) - Paso debe ser positivo.", max, min);
+        printf("[!]: El paso debe ser positivo y menor o igual a %.2f (longitud del intervalo).\n", max - min);
         IngresarDecimal(SIGNO_POSITIVO, false, &paso);
-    } while (paso > max || paso < min);
+    } while (paso > (max-min)|| paso <= 0.0);
 
     Lista resultante = calcularRango(listatemp, min, max, paso);
 

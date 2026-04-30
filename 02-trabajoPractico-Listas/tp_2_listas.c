@@ -203,7 +203,7 @@ int CompararListas(Lista l1, Lista L2)
                 *((float*)te->valor) = (float)valor;
                 if(!l_agregar(list, te)) printf("[ERROR] No se pudo ingresar el elemento. [ERROR]\n");
             }
-        } while (sigue || l_es_llena(list));
+        } while (sigue && !l_es_llena(list));
         
 
     }

@@ -2,9 +2,10 @@
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 /*
-    Modificado por ultima vez 28/04 - Franco
+    Modificado por ultima vez 30/04 - Federico
 */ 
 
 //-----------------------------------------------------------------
@@ -176,8 +177,69 @@ int CompararListas(Lista l1, Lista L2)
 //-----------------------------------------------------------------
 //----------------------------Ejercicio 5--------------------------
 //-----------------------------------------------------------------
-
-
+void hacerPolinomio(Lista list){
+		int input;
+		int c;
+		int grado=0;
+		float valor;
+		printf ("A continuacion ingrese los datos del polinomio, empezando por un grado positivo (ENTERO), ingrese -1 en grado para parar la carga");
+		input= scanf ("%d",&grado);
+		while (input!=1 || grado<-1){
+			printf("Dato erroneo ingresado, ingrese un grado ENTERO >=0 o -1 para finalizar carga");
+			while ((c = getchar()) != '\n' && c != EOF); //Limpia buffer en caso de error
+			input= scanf ("%d",&grado);
+		}
+		while (grado>=0){
+			printf ("Ahora ingrese el coeficiente del grado %d",grado);
+			input= scanf ("%f",&valor);
+			while (input!=1){
+			printf("Dato erroneo ingresado, ingrese un coeficiente decimal");
+			while ((c = getchar()) != '\n' && c != EOF); //Limpia buffer en caso de error
+			input= scanf ("%f",&valor);
+		}
+			float* p = malloc(sizeof(float));
+			*p = valor;
+			TipoElemento elemento= te_crear_con_valor(grado,p);
+			l_agregar(list,elemento);
+			printf ("Ingrese los datos del proximo elemento del polinomio o -1 para finalizar carga");
+			input= scanf ("%d",&grado);
+			while (input!=1 || grado<-1){
+			printf("Dato erroneo ingresado, ingrese un grado ENTERO >=0 o -1 para finalizar carga");
+			while ((c = getchar()) != '\n' && c != EOF); //Limpia buffer en caso de error
+			input= scanf ("%d",&grado);
+		}
+		}		
+}
+		float evaluarPoliomio(Lista list, float x){
+			float resultado=0;
+			int grado;
+			float coeficiente;
+			Iterador it= iterador(list);
+			while (hay_siguiente(it)){
+				TipoElemento elemento= siguiente(it);
+				grado= elemento->clave;
+				coeficiente= *(float*) elemento->valor;
+				resultado+= coeficiente * (pow(x,grado)); //Coeficiente * (x**grado)
+			}
+			return resultado;
+		}
+		
+		Lista calcularRango(Lista list, double x, double y, double sumando){
+			int indice=0;
+			Lista resultado= l_crear();
+			if (sumando <=0){
+					return resultado; // Evito bucle infinito (I+0=I, por lo tanto i nunca llega a i<=y)
+					}
+			for (double i=x;i<=y; i+=sumando){
+				float val= evaluarPoliomio(list,i);
+				float *p= malloc(sizeof(float));
+				*p=val;
+				TipoElemento elemento= te_crear_con_valor(indice,p);
+				l_agregar(resultado,elemento);	
+				indice++;
+			}
+			return resultado;
+		}
 
 //-----------------------------------------------------------------
 //----------------------------Ejercicio 6--------------------------

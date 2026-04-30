@@ -153,7 +153,7 @@ bool IngresarEntero(ReglaSigno signo, bool permitirExit, int *valor)
     return true;
 }
 
-double IngresarDecimal(ReglaSigno signo)
+/*double IngresarDecimal(ReglaSigno signo)
 {
     int tipoEsperado, rest;
     char buffer[256];
@@ -176,6 +176,33 @@ double IngresarDecimal(ReglaSigno signo)
     char* fin;
     double  valor = strtod(buffer, &fin);
     return valor;
+}*/
+
+bool IngresarDecimal(ReglaSigno signo, bool permitirExit, double *valor)
+{
+    char buffer[256];
+    TipoDatoIngresado tipoDatoIngresado;
+    int primerIntento = 1;
+    int tipoEsperado;
+
+    if (signo == SIGNO_NEGATIVO) {tipoEsperado = TIPO_FLOTANTE_NEGATIVO;
+    }else if(signo == SIGNO_POSITIVO){tipoEsperado = TIPO_FLOTANTE_POSITIVO;
+    } else {tipoEsperado = -1;}
+
+    do
+    {
+        if (primerIntento == 1) printf("\n[!]: >> Ingrese un numero decimal%s (FORMATO: 'ENTERO.DECIMAL')%s: ",SignoToString(signo), permitirExit ? " o escriba exit para salir" : "");
+        else printf("\n[!]: >> <ERROR: Ingreso invalido> - Ingrese un numero decimal%s%s: ", SignoToString(signo), permitirExit ? " o escriba exit para salir" : "");
+
+        if (!LeerBuffer(buffer, sizeof(buffer), permitirExit)) return false; // CONTROLA SI SEE CORTA O SIGUE (UTIL EN CARGAS)
+
+        tipoDatoIngresado = IdentificarTipoDato(buffer);
+        primerIntento = 0;
+
+    } while ((tipoDatoIngresado != TIPO_FLOTANTE_POSITIVO && tipoDatoIngresado != TIPO_FLOTANTE_NEGATIVO)|| (signo != SIGNO_NO_IMPORTA && tipoDatoIngresado != tipoEsperado));
+    char* fin;
+    *valor = strtod(buffer,&fin);
+    return true;
 }
 
 char* IngresarAlfanumerico()

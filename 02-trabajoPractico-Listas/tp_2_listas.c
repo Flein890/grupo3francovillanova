@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include "../libs/validaciones/headers/tp_validaciones.h"
 
 /*
     Modificado por ultima vez 30/04 - Federico
@@ -177,39 +178,35 @@ int CompararListas(Lista l1, Lista L2)
 //-----------------------------------------------------------------
 //----------------------------Ejercicio 5--------------------------
 //-----------------------------------------------------------------
-void hacerPolinomio(Lista list){
-		int input;
-		int c;
-		int grado=0;
-		float valor;
-		printf ("A continuacion ingrese los datos del polinomio, empezando por un grado positivo (ENTERO), ingrese -1 en grado para parar la carga");
-		input= scanf ("%d",&grado);
-		while (input!=1 || grado<-1){
-			printf("Dato erroneo ingresado, ingrese un grado ENTERO >=0 o -1 para finalizar carga");
-			while ((c = getchar()) != '\n' && c != EOF); //Limpia buffer en caso de error
-			input= scanf ("%d",&grado);
-		}
-		while (grado>=0){
-			printf ("Ahora ingrese el coeficiente del grado %d",grado);
-			input= scanf ("%f",&valor);
-			while (input!=1){
-			printf("Dato erroneo ingresado, ingrese un coeficiente decimal");
-			while ((c = getchar()) != '\n' && c != EOF); //Limpia buffer en caso de error
-			input= scanf ("%f",&valor);
-		}
-			float* p = malloc(sizeof(float));
-			*p = valor;
-			TipoElemento elemento= te_crear_con_valor(grado,p);
-			l_agregar(list,elemento);
-			printf ("Ingrese los datos del proximo elemento del polinomio o -1 para finalizar carga");
-			input= scanf ("%d",&grado);
-			while (input!=1 || grado<-1){
-			printf("Dato erroneo ingresado, ingrese un grado ENTERO >=0 o -1 para finalizar carga");
-			while ((c = getchar()) != '\n' && c != EOF); //Limpia buffer en caso de error
-			input= scanf ("%d",&grado);
-		}
-		}		
-}
+    void hacerPolinomio(Lista list)
+    {
+        int input;
+        int c;
+        int grado;
+        double valor;
+        bool sigue;
+        bool cargado;
+
+        do
+        {
+            printf("\033[2J\033[H");
+            if(cargado) printf("\n[ERROR]: Atencion, ya existe un coeficiente con ese grado (%d), ingrese otro. [ERROR]\n", grado);
+            printf("\n[>>]: Por favor, ingrese un grado para un coeficiente.\n");
+            cargado = false;
+            sigue = IngresarEntero(SIGNO_POSITIVO, true, &grado);
+            if((l_buscar(list, grado) != NULL)){cargado = true;}
+            if(sigue && cargado == false)
+            {
+                printf("\n\n[>>]: Por favor, ingrese un coeficiente para el grado %d.\n", grado);
+                IngresarDecimal(SIGNO_NO_IMPORTA, false, &valor);
+                TipoElemento te = te_crear_con_valor(grado, malloc(sizeof(float)));
+                *((float*)te->valor) = (float)valor;
+                if(!l_agregar(list, te)) printf("[ERROR] No se pudo ingresar el elemento. [ERROR]\n");
+            }
+        } while (sigue || l_es_llena(list));
+        
+
+    }
 		float evaluarPoliomio(Lista list, float x){
 			float resultado=0;
 			int grado;

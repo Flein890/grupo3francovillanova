@@ -62,7 +62,7 @@ bool IngresarEntero(ReglaSigno signo, bool permitirExit, int *valor);
             referencia.
 
 */
-double IngresarDecimal(ReglaSigno signo);                       // Permite y valida el ingreso de decimales. (Puede ser RESTRICTIVO: Unicamente Positivos, Negativos o ambos). Controlado por ReglaSigno.
+bool IngresarDecimal(ReglaSigno signo, bool permitirExit, double *valor);                       // Permite y valida el ingreso de decimales. (Puede ser RESTRICTIVO: Unicamente Positivos, Negativos o ambos). Controlado por ReglaSigno.
 //---------------------------------------------------------//
 // [!] SE DEBE USAR FREE UNA VEZ YA NO SE UTILICEN M�S [!]
 char* IngresarSoloLetras();                                     // Permite y valida el ingreso de �nicamente letras.

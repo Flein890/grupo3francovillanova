@@ -18,6 +18,8 @@ void cargar_lista(Lista l1);
 void limpiar_terminal_c();
 void limpiar_c();
 void verlista_estilizado(Lista l1);
+void cargar_lista_flotantes(Lista l1);
+void verlista_especial(Lista l1, bool verClave);
 //=========================//
 void ejecutar_2A(Lista l1, Lista l2)
 {
@@ -90,6 +92,47 @@ void ejecutar_4(Lista l1, Lista l2)
     }
     printf("\n[!] Para comparar las listas, se corren una por una, por ende, su complejidad algoritmica es LINEAL. [!]\n");
 }
+void ejecutar_5()
+{
+    Lista listatemp = l_crear();
+
+    double x;
+    float evaluacionenx;
+    double max, min, paso;
+    
+
+    printf("[ATENCION]: Este ejercicio requiere de la carga de una lista EXCLUSIVA para el.\n");
+    hacerPolinomio(listatemp);
+    printf("\n\n[!]: Acontinuacion, ingrese un valor X para evaluar el polinomio.\n");
+    IngresarDecimal(SIGNO_NO_IMPORTA, false, &x);
+    evaluacionenx = evaluarPoliomio(listatemp, (float)x);
+    limpiar_terminal_c();
+
+    printf("\n\n\n[!]: Acontinuacion, debera ingresar un rango para evaluar el polinomio, por favor, ingrese el valor MAXIMO del rango\n");
+    IngresarDecimal(SIGNO_NO_IMPORTA, false, &max);
+    do
+    {
+        printf("\n[!]: Ingrese el valor MINIMO para este rango (MAX (%.2f) > MIN): ", max);
+        IngresarDecimal(SIGNO_NO_IMPORTA, false, &min);
+    } while (min >= max);
+
+    printf("\n[!]: Acontinuacion, debera ingresar un valor a ser utilizado como 'paso' entre los extremos del rango.\n");
+    do
+    {
+        printf("\n[!]: Max (%.4f) >= Paso >= min (%.4f) - Paso debe ser positivo.", max, min);
+        IngresarDecimal(SIGNO_POSITIVO, false, &paso);
+    } while (paso > max || paso < min);
+
+    Lista resultante = calcularRango(listatemp, min, max, paso);
+
+    printf("\n\n\n[!] POLINOMIO A EVALUAR:\n");    
+    verlista_especial(listatemp, true);
+    printf("\n");
+    printf("[RESPUESTA A]: Polinomio evaluado en %.4f es igual a %.4f.\n", x, evaluacionenx);
+    printf("[RESPUESTA B]: Polinomio evaluado en el rango de [%.4f a %.4f] con un paso de %.4f resulta en: \n",min, max, paso);
+    printf("[RESPUESTA B]: Lista Resultante:\n"); 
+    verlista_especial(resultante, false);
+}
 
 void ejecutar_6(Lista l1,Lista l2){
    
@@ -150,6 +193,7 @@ void respuesta_menu(int seleccion, Lista l1, Lista l2)
         }
         case 4:
         {
+            ejecutar_5();
             break;
         }
         case 5:
@@ -299,7 +343,7 @@ void cargar_lista(Lista l)
         {
             sigue = IngresarEntero(SIGNO_NO_IMPORTA, true, &valor);
             if(sigue) l_agregar(l, te_crear(valor));
-        } while (sigue);
+        } while (sigue && !l_es_llena(l));
     }
     else
     {
@@ -309,7 +353,7 @@ void cargar_lista(Lista l)
         {
             printf("\n[!]: Ingrese el MAXIMO DE CLAVES a generar (MAX 100)");
             IngresarEntero(SIGNO_POSITIVO, false, &claves);
-        } while (claves > 100);
+        } while (claves > 100 || claves == 0);
 
         printf("\n[!]: Ingrese el valor MAXIMO para las claves:");
         IngresarEntero(SIGNO_NO_IMPORTA, false, &max);
@@ -318,7 +362,7 @@ void cargar_lista(Lista l)
         {
             printf("\n[!]: Ingrese el valor MINIMO para las claves (MAX (%d) > MIN): ", max);
             IngresarEntero(SIGNO_NO_IMPORTA, false, &min);
-        } while (min > max);
+        } while (min > max || max == min);
 
         for(int i = 0; i < claves; i++)
         {
@@ -326,6 +370,30 @@ void cargar_lista(Lista l)
         }
         
     }
+}
+void verlista_especial(Lista l1, bool verClave)
+{
+    if(l_es_vacia(l1)) printf(" Lista vacia. \n");
+    Iterador it = iterador(l1);
+    if(verClave == true)
+    {
+        printf("\n[!] [Formato > Coeficiente (Grado)]\n");    
+        while(hay_siguiente(it))
+        {
+            TipoElemento te = siguiente(it);
+            printf(" %.4f (%d)", *((float*)(te->valor)), te->clave);    
+        }
+    }
+    else
+    {
+        //printf("\n[!] [Formato > Resultados evaluados en rango]\n");    
+        while(hay_siguiente(it))
+        {
+            TipoElemento te = siguiente(it);
+            printf(" %.4f", *((float*)(te->valor)));    
+        }
+    }
+    printf("\n");   
 }
 
 void verlista_estilizado(Lista l1)

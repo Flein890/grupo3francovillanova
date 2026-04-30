@@ -7,7 +7,9 @@
     Modificado por ultima vez 28/04 - Franco
 */ 
 
-// Punto 2
+//-----------------------------------------------------------------
+//----------------------------Ejercicio 2--------------------------
+//-----------------------------------------------------------------
 
 Lista verElementosRepetidos(Lista l1, Lista l2)
 {
@@ -95,29 +97,6 @@ ResultadoValorMinimo valorMinimo(Lista l1, Lista l2)
     return rest;
 }
 
-
-int CompararListas(Lista l1, Lista L2)
-{
-    int mayorl1 = 0, 
-    iguales = 0, 
-    mayorl2 = 0;
-    Iterador i_l1 = iterador(l1);
-    Iterador i_l2 = iterador(L2);
-    while(hay_siguiente(i_l1) && hay_siguiente(i_l2))
-    {
-        TipoElemento te1 = siguiente(i_l1);
-        TipoElemento te2 = siguiente(i_l2);
-        if(te1->clave > te2->clave) mayorl1++;
-        else if(te2->clave > te1->clave)mayorl2++;
-        else iguales++;
-    }
-    free(i_l1);
-    free(i_l2);
-    if(mayorl1 > mayorl2) return 1;
-    else if(mayorl2 > mayorl1) return 2;
-    else return 0;
-}
-
 //-----------------------------------------------------------------
 //----------------------------Ejercicio 3--------------------------
 //-----------------------------------------------------------------
@@ -169,7 +148,39 @@ ResultadosMul multiplo(Lista l1, Lista l2){
 }
 
 //-----------------------------------------------------------------
-//--------------------------------EJ6------------------------------
+//----------------------------Ejercicio 4--------------------------
+//-----------------------------------------------------------------
+
+int CompararListas(Lista l1, Lista L2)
+{
+    int mayorl1 = 0, 
+    iguales = 0, 
+    mayorl2 = 0;
+    Iterador i_l1 = iterador(l1);
+    Iterador i_l2 = iterador(L2);
+    while(hay_siguiente(i_l1) && hay_siguiente(i_l2))
+    {
+        TipoElemento te1 = siguiente(i_l1);
+        TipoElemento te2 = siguiente(i_l2);
+        if(te1->clave > te2->clave) mayorl1++;
+        else if(te2->clave > te1->clave)mayorl2++;
+        else iguales++;
+    }
+    free(i_l1);
+    free(i_l2);
+    if(mayorl1 > mayorl2) return 1;
+    else if(mayorl2 > mayorl1) return 2;
+    else return 0;
+}
+
+//-----------------------------------------------------------------
+//----------------------------Ejercicio 5--------------------------
+//-----------------------------------------------------------------
+
+
+
+//-----------------------------------------------------------------
+//----------------------------Ejercicio 6--------------------------
 //-----------------------------------------------------------------
 
 
